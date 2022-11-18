@@ -1,0 +1,28 @@
+From efddbe0dc2d0a959125aba937a8d85705bb70fb0 Mon Sep 17 00:00:00 2001
+From: Alberto Ponces <ponces26@gmail.com>
+Date: Sun, 20 Nov 2022 20:04:13 +0000
+Subject: [PATCH 2/2] Revert "StorageManager: Add dummy inCryptKeeperBounce method"
+
+This reverts commit 787e5e4ef82abc025993c0aded1741e2f25bf49d.
+---
+ core/java/android/os/storage/StorageManager.java | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/core/java/android/os/storage/StorageManager.java b/core/java/android/os/storage/StorageManager.java
+index 8241a59202f0..7a0e0d310f05 100644
+--- a/core/java/android/os/storage/StorageManager.java
++++ b/core/java/android/os/storage/StorageManager.java
+@@ -1699,10 +1699,6 @@ public class StorageManager {
+         return RoSystemProperties.CRYPTO_ENCRYPTED;
+     }
+ 
+-    public static boolean inCryptKeeperBounce() {
+-        return false;
+-    }
+-
+     /** {@hide}
+      * Is this device file encrypted?
+      * @return true for file encrypted. (Implies isEncrypted() == true)
+-- 
+2.34.1
+

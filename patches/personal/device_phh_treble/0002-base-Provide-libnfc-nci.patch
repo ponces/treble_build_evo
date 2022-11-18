@@ -1,0 +1,25 @@
+From 733911489af7e658d91ec579ee316c9eba29985c Mon Sep 17 00:00:00 2001
+From: Alberto Ponces <ponces26@gmail.com>
+Date: Wed, 25 Dec 2019 12:34:05 +0200
+Subject: [PATCH 2/6] base: Provide libnfc-nci
+
+	modified:   base.mk
+---
+ base.mk | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/base.mk b/base.mk
+index c144c1e..d9c3ca6 100644
+--- a/base.mk
++++ b/base.mk
+@@ -46,6 +46,7 @@ PRODUCT_COPY_FILES += \
+ #   Provide default libnfc-nci.conf file for devices that does not have one in
+ #   vendor/etc
+ PRODUCT_COPY_FILES += \
++	system/nfc/conf/libnfc-nci.conf:system/etc/libnfc-nci.conf \
+ 	device/phh/treble/nfc/libnfc-nci.conf:system/phh/libnfc-nci-oreo.conf \
+ 	device/phh/treble/nfc/libnfc-nci-huawei.conf:system/phh/libnfc-nci-huawei.conf
+ 
+-- 
+2.25.1
+

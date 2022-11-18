@@ -1,0 +1,39 @@
+From 1e5aef82a995e0244b3eb084fca25c7f1eedc324 Mon Sep 17 00:00:00 2001
+From: Andy CrossGate Yan <GeForce8800Ultra@gmail.com>
+Date: Sun, 27 Jun 2021 15:37:56 +0000
+Subject: [PATCH 1/6] treble: Don't handle apns-conf
+
+PE has its own well-maintained copy
+
+Change-Id: If568101f21098c75879af8b9b6141af179566960
+---
+ base-pre.mk | 3 ---
+ base.mk     | 4 ----
+ 2 files changed, 7 deletions(-)
+
+diff --git a/base-pre.mk b/base-pre.mk
+index 6a317e4..e69de29 100644
+--- a/base-pre.mk
++++ b/base-pre.mk
+@@ -1,3 +0,0 @@
+-#Use a more decent APN config
+-PRODUCT_COPY_FILES += \
+-	device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
+diff --git a/base.mk b/base.mk
+index ce2f218..8c53fa5 100644
+--- a/base.mk
++++ b/base.mk
+@@ -17,10 +17,6 @@ PRODUCT_COPY_FILES += \
+     device/phh/treble/bluetooth/audio/config/sysbta_audio_policy_configuration.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysbta_audio_policy_configuration.xml \
+     device/phh/treble/bluetooth/audio/config/sysbta_audio_policy_configuration_7_0.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysbta_audio_policy_configuration_7_0.xml
+ 
+-#Use a more decent APN config
+-PRODUCT_COPY_FILES += \
+-	device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
+-
+ SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += device/phh/treble/sepolicy
+ PRODUCT_PACKAGE_OVERLAYS += device/phh/treble/overlay
+ 
+-- 
+2.25.1
+

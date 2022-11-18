@@ -1,0 +1,30 @@
+From e679bd168b2d45d552e43072f11786f2891358db Mon Sep 17 00:00:00 2001
+From: Andy CrossGate Yan <GeForce8800Ultra@gmail.com>
+Date: Mon, 5 Oct 2020 01:51:46 +0000
+Subject: [PATCH 1/2] build: Don't handle apns-conf
+
+Leave it to vendor/evolution instead
+
+Change-Id: I51fb1436ee0ee2e33b20ca0810b69e827f3f34dc
+---
+ target/product/full_base_telephony.mk | 5 -----
+ 1 file changed, 5 deletions(-)
+
+diff --git a/target/product/full_base_telephony.mk b/target/product/full_base_telephony.mk
+index 43df42f43..5470ad2be 100644
+--- a/target/product/full_base_telephony.mk
++++ b/target/product/full_base_telephony.mk
+@@ -26,10 +26,5 @@ PRODUCT_VENDOR_PROPERTIES := \
+ PRODUCT_COPY_FILES := \
+     frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml
+ 
+-ifeq ($(EVOLUTION_BUILD),)
+-PRODUCT_COPY_FILES += \
+-    device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
+-endif
+-
+ $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
+ $(call inherit-product, $(SRC_TARGET_DIR)/product/telephony.mk)
+-- 
+2.25.1
+

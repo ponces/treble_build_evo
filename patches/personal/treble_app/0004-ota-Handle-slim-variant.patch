@@ -1,0 +1,30 @@
+From 6e64d6a080f4a8f41e8972311cab40c0a0009900 Mon Sep 17 00:00:00 2001
+From: Alberto Ponces <ponces26@gmail.com>
+Date: Wed, 9 Feb 2022 12:41:30 +0000
+Subject: [PATCH 3/3] ota: Handle slim variant
+
+---
+ app/src/main/java/me/phh/treble/app/UpdaterActivity.kt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/app/src/main/java/me/phh/treble/app/UpdaterActivity.kt b/app/src/main/java/me/phh/treble/app/UpdaterActivity.kt
+index b90bc00..e8de382 100644
+--- a/app/src/main/java/me/phh/treble/app/UpdaterActivity.kt
++++ b/app/src/main/java/me/phh/treble/app/UpdaterActivity.kt
+@@ -212,10 +212,10 @@ class UpdaterActivity : PreferenceActivity() {
+ 
+     private fun getVariant() : String {
+         var flavor = SystemProperties.get("ro.build.flavor").replace(Regex("-user(debug)?"), "")
+-        val secure = File("/system/phh/secure")
++        val velvet = File("/system/product/priv-app/Velvet/Velvet.apk")
+         val vndklite = File("/system_ext/apex/com.android.vndk.v27/etc/vndkcore.libraries.27.txt")
+-        if (secure.exists()) {
+-            flavor += "-secure"
++        if (!velvet.exists()) {
++            flavor += "-slim"
+         } else if (vndklite.exists()) {
+             flavor += "-vndklite"
+         }
+-- 
+2.32.0
+

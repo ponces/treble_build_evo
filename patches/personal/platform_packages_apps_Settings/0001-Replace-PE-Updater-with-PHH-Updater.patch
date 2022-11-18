@@ -1,0 +1,36 @@
+From c019e37199cfc609ddc69d43d1e47057c3336e13 Mon Sep 17 00:00:00 2001
+From: Alberto Ponces <ponces26@gmail.com>
+Date: Tue, 1 Feb 2022 13:47:00 +0000
+Subject: [PATCH] Replace PE Updater with PHH Updater
+
+Change-Id: I15b7b5e2938a906c2fa151d582c411d1db11eb55
+---
+ .../settings/system/SystemUpdatePreferenceController.java    | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/src/com/android/settings/system/SystemUpdatePreferenceController.java b/src/com/android/settings/system/SystemUpdatePreferenceController.java
+index 2dc7fc3daa..ec2db61e46 100644
+--- a/src/com/android/settings/system/SystemUpdatePreferenceController.java
++++ b/src/com/android/settings/system/SystemUpdatePreferenceController.java
+@@ -36,7 +36,7 @@ public class SystemUpdatePreferenceController extends BasePreferenceController {
+     private static final String KEY_SYSTEM_UPDATE_SETTINGS = "system_update_settings";
+ 
+     private static final String OTA_BUILD_TYPE_PROP = "org.evolution.build_type";
+-    private static final String OTA_APP_PACKAGE = "org.evolution.ota";
++    private static final String OTA_APP_PACKAGE = "me.phh.treble.app";
+ 
+     private final UserManager mUm;
+ 
+@@ -47,8 +47,7 @@ public class SystemUpdatePreferenceController extends BasePreferenceController {
+ 
+     @Override
+     public int getAvailabilityStatus() {
+-        String buildtype = SystemProperties.get(OTA_BUILD_TYPE_PROP,"unofficial");
+-        if (!mUm.isAdminUser() || !buildtype.equalsIgnoreCase("official")){
++        if (!mUm.isAdminUser()){
+             return UNSUPPORTED_ON_DEVICE;
+         }
+         try {
+-- 
+2.32.0
+

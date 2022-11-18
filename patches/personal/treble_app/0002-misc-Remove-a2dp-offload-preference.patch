@@ -1,0 +1,43 @@
+From 3d9893624604fe27c15edf779a11dbb46b600b32 Mon Sep 17 00:00:00 2001
+From: Alberto Ponces <ponces26@gmail.com>
+Date: Tue, 1 Nov 2022 16:19:04 +0000
+Subject: [PATCH] misc: Remove a2dp offload preference
+
+---
+ app/src/main/java/me/phh/treble/app/Misc.kt | 4 ----
+ app/src/main/res/xml/pref_misc.xml          | 4 ----
+ 2 files changed, 8 deletions(-)
+
+diff --git a/app/src/main/java/me/phh/treble/app/Misc.kt b/app/src/main/java/me/phh/treble/app/Misc.kt
+index 0cdb728..294f0ab 100644
+--- a/app/src/main/java/me/phh/treble/app/Misc.kt
++++ b/app/src/main/java/me/phh/treble/app/Misc.kt
+@@ -211,10 +211,6 @@ object Misc: EntryStartup {
+                 val value = sp.getBoolean(key, false)
+                 SystemProperties.set("persist.sys.phh.disable_audio_effects", if (value) "1" else "0")
+             }
+-            MiscSettings.forceA2dpOffloadDisable -> {
+-                val value = sp.getBoolean(key, false)
+-                SystemProperties.set("persist.sys.phh.disable_a2dp_offload", if (value) "1" else "0")
+-            }
+             MiscSettings.noHwcomposer -> {
+                 val value = sp.getBoolean(key, false)
+                 enableHwcOverlay(!value)
+diff --git a/app/src/main/res/xml/pref_misc.xml b/app/src/main/res/xml/pref_misc.xml
+index b90d0f0..cb04ba5 100644
+--- a/app/src/main/res/xml/pref_misc.xml
++++ b/app/src/main/res/xml/pref_misc.xml
+@@ -116,10 +116,6 @@
+     	    android:entryValues="@array/pref_misc_max_aspect_ratio_pre_o_values"
+     	    android:key="key_misc_max_aspect_ratio_pre_o"
+     	    android:title="Compatibility max aspect ratio" />
+-		<CheckBoxPreference
+-            android:defaultValue="false"
+-            android:key="key_misc_force_a2dp_offload_disable"
+-            android:title="Force-disable A2DP offload" />
+ 		<CheckBoxPreference
+             android:defaultValue="false"
+             android:key="key_misc_force_navbar_off"
+-- 
+2.34.1
+

@@ -1,0 +1,26 @@
+From f9a585a7a61eae3ec0a9e482269424668a27c8d3 Mon Sep 17 00:00:00 2001
+From: Alberto Ponces <ponces26@gmail.com>
+Date: Wed, 20 Oct 2021 15:54:26 +0100
+Subject: [PATCH 3/4] build: Disable inline kernel building
+
+Change-Id: I4c01aa093474a8017366bd5e98586c58b2cd6452
+---
+ config/common.mk      | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/config/common.mk b/config/common.mk
+index 0cffb828..12a07ad7 100644
+--- a/config/common.mk
++++ b/config/common.mk
+@@ -115,6 +115,8 @@ PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
+     system/%/libfuse-lite.so \
+     system/%/libntfs-3g.so
+ 
++TARGET_NO_KERNEL_OVERRIDE := true
++
+ # Evolution X customization
+ TARGET_SUPPORTS_QUICK_TAP ?= false
+ TARGET_USES_MINI_GAPPS ?= false
+-- 
+2.25.1
+

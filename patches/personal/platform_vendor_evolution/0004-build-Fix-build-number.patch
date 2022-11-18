@@ -1,0 +1,28 @@
+From df6e77eabe8083191e2984182d8aa82da7d08247 Mon Sep 17 00:00:00 2001
+From: Alberto Ponces <ponces26@gmail.com>
+Date: Sat, 3 Oct 2020 14:28:35 -0700
+Subject: [PATCH 4/4] build: Fix build number
+
+This is only valid for GSI images.
+
+Change-Id: I55c8897d7d4d5c2a9e62b1a931b3856b2e38956e
+---
+ build/core/main_version.mk | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/config/version.mk b/config/version.mk
+index d50640c9..e341525f 100644
+--- a/config/version.mk
++++ b/config/version.mk
+@@ -37,7 +37,7 @@ EVO_PLATFORM_VERSION := $(PLATFORM_VERSION)
+ 
+ TARGET_PRODUCT_SHORT := $(subst evolution_,,$(EVOLUTION_BUILD))
+ 
+-EVO_VERSION_DISPLAY := $(EVO_CODENAME)-$(EVO_BASE_VERSION)-$(TARGET_PRODUCT_SHORT)-$(EVO_BUILD_DATE)-$(EVO_BUILD_TYPE)
++EVO_VERSION_DISPLAY := $(TARGET_PRODUCT)-$(EVO_BASE_VERSION)-$(TARGET_PRODUCT_SHORT)-$(EVO_BUILD_DATE)-$(EVO_BUILD_TYPE)
+ ifeq ($(EVO_BUILD_TYPE), OFFICIAL)
+     EVO_VERSION := $(TARGET_PRODUCT)-ota-$(BUILD_ID_LC)-$(shell date +%m%d%H%M)
+     EVO_DELTA_VERSION := $(TARGET_PRODUCT)-delta-$(BUILD_ID_LC)-$(shell date +%m%d%H%M)
+-- 
+2.25.1
+

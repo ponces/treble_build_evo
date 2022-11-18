@@ -1,0 +1,25 @@
+From 122fbeff18f701b7fe64ef366a6812d8db1c98ed Mon Sep 17 00:00:00 2001
+From: Alberto Ponces <ponces26@gmail.com>
+Date: Sat, 19 Nov 2022 11:02:12 +0000
+Subject: [PATCH] Enable mini gapps
+
+---
+ config/common.mk | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/config/common.mk b/config/common.mk
+index 12a07ad7..8d00fbd6 100644
+--- a/config/common.mk
++++ b/config/common.mk
+@@ -119,7 +119,7 @@ TARGET_NO_KERNEL_OVERRIDE := true
+ 
+ # Evolution X customization
+ TARGET_SUPPORTS_QUICK_TAP ?= false
+-TARGET_USES_MINI_GAPPS ?= false
++TARGET_USES_MINI_GAPPS ?= true
+ 
+ # Face Unlock
+ TARGET_FACE_UNLOCK_SUPPORTED ?= true
+-- 
+2.34.1
+
