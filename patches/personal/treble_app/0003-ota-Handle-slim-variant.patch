@@ -1,7 +1,7 @@
 From 6e64d6a080f4a8f41e8972311cab40c0a0009900 Mon Sep 17 00:00:00 2001
 From: Alberto Ponces <ponces26@gmail.com>
 Date: Wed, 9 Feb 2022 12:41:30 +0000
-Subject: [PATCH 3/3] ota: Handle slim variant
+Subject: [PATCH 3/4] ota: Handle slim variant
 
 ---
  app/src/main/java/me/phh/treble/app/UpdaterActivity.kt | 6 +++---
