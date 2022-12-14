@@ -1,7 +1,7 @@
 From ad68455db3b986e4fe75d676c3ef50c173f797ee Mon Sep 17 00:00:00 2001
 From: Raphael Mounier <mounierr07@gmail.com>
 Date: Thu, 13 Oct 2022 12:01:29 +0200
-Subject: [PATCH 3/3] Fix sepolicy for offline charging EMUI9 kirin
+Subject: [PATCH] Fix sepolicy for offline charging EMUI9 kirin
 
 Fix sepolicy for offline charging EMUI9 kirin
 ---
