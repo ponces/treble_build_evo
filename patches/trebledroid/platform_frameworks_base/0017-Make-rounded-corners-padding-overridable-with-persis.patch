@@ -12,7 +12,7 @@ Change-Id: I481c1c8849b2f22a7cdfb2896a6d3c2e7e3b44d9
  3 files changed, 14 insertions(+), 5 deletions(-)
 
 diff --git a/packages/SystemUI/src/com/android/systemui/qs/QuickStatusBarHeader.java b/packages/SystemUI/src/com/android/systemui/qs/QuickStatusBarHeader.java
-index 851499931708..9e66bb7f8a47 100644
+index b01a8bfb4492..e0bb310218ca 100644
 --- a/packages/SystemUI/src/com/android/systemui/qs/QuickStatusBarHeader.java
 +++ b/packages/SystemUI/src/com/android/systemui/qs/QuickStatusBarHeader.java
 @@ -29,6 +29,7 @@ import android.content.res.Resources;
@@ -23,7 +23,7 @@ index 851499931708..9e66bb7f8a47 100644
  import android.os.VibrationEffect;
  import android.os.Vibrator;
  import android.provider.AlarmClock;
-@@ -334,8 +335,10 @@ public class QuickStatusBarHeader extends FrameLayout implements TunerService.Tu
+@@ -330,8 +331,10 @@ public class QuickStatusBarHeader extends FrameLayout implements TunerService.Tu
          mStatusIconsView.setVisibility(gone ? View.GONE : View.VISIBLE);
          mDatePrivacyView.setVisibility(gone ? View.GONE : View.VISIBLE);
  
@@ -34,8 +34,8 @@ index 851499931708..9e66bb7f8a47 100644
 +            mRoundedCornerPadding = resources.getDimensionPixelSize(
 +                    R.dimen.rounded_corner_content_padding);
  
-         mStatusBarPaddingStart = resources.getDimensionPixelSize(
-                 R.dimen.status_bar_padding_start);
+         int qsOffsetHeight = SystemBarUtils.getQuickQsOffsetHeight(mContext);
+ 
 diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardStatusBarView.java b/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardStatusBarView.java
 index 9a333d1acfd2..06c235d66849 100644
 --- a/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardStatusBarView.java

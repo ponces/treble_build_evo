@@ -162,8 +162,8 @@ index c7244be82e..5df3f99896 100644
  
 -        SignalStrength ss = mRil.fixupSignalStrength10(ssInitial);
          // Note this is set to "verbose" because it happens frequently
--        if (RIL.RILJ_LOGV) mRil.unsljLogvRet(RIL_UNSOL_SIGNAL_STRENGTH, ss);
-+	if (RIL.RILJ_LOGV) mRil.unsljLogvRet(RIL_UNSOL_SIGNAL_STRENGTH, signalStrength);
+-        if (mRil.isLogvOrTrace()) mRil.unsljLogvRet(RIL_UNSOL_SIGNAL_STRENGTH, ss);
++	if (mRil.isLogvOrTrace()) mRil.unsljLogvRet(RIL_UNSOL_SIGNAL_STRENGTH, signalStrength);
 +
 +	// Fix signalStrength for Huawei
 +	String hardware = android.os.SystemProperties.get("ro.hardware", "");

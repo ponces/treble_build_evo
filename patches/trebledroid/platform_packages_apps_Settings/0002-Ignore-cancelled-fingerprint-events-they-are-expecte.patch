@@ -20,9 +20,9 @@ index 98210b3bab..3172bfa891 100644
 +	android.util.Log.e("PHH-Enroll", "heyo " + errMsgId + ", " + errString , new Exception());
 +	if (errMsgId == 5) return;
 +
-         FingerprintErrorDialog.showErrorDialog(this, errMsgId);
-         stopIconAnimation();
-         if (!mCanAssumeUdfps) {
+         onCancelEnrollment(errMsgId);
+     }
+ 
 diff --git a/src/com/android/settings/biometrics/fingerprint/FingerprintEnrollFindSensor.java b/src/com/android/settings/biometrics/fingerprint/FingerprintEnrollFindSensor.java
 index 627a5143a3..42421e48e2 100644
 --- a/src/com/android/settings/biometrics/fingerprint/FingerprintEnrollFindSensor.java
@@ -33,8 +33,8 @@ index 627a5143a3..42421e48e2 100644
      public void onEnrollmentError(int errMsgId, CharSequence errString) {
 +	android.util.Log.e("PHH-Enroll", "heyo " + errMsgId + ", " + errString + ", " + mNextClicked, new Exception());
          if (mNextClicked && errMsgId == FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
-             mNextClicked = false;
              proceedToEnrolling(false /* cancelEnrollment */);
+         } else {
 -- 
 2.25.1
 
