@@ -1,7 +1,7 @@
 From c019e37199cfc609ddc69d43d1e47057c3336e13 Mon Sep 17 00:00:00 2001
 From: Alberto Ponces <ponces26@gmail.com>
 Date: Tue, 1 Feb 2022 13:47:00 +0000
-Subject: [PATCH] Replace PE Updater with PHH Updater
+Subject: [PATCH] Replace EvoX Updater with PHH Updater
 
 Change-Id: I15b7b5e2938a906c2fa151d582c411d1db11eb55
 ---

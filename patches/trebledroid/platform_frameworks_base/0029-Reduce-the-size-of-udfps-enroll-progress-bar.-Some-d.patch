@@ -1,7 +1,7 @@
 From 0ce3ecf0c8257abd691993a77f41ecdb27d1357a Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Fri, 17 Dec 2021 17:16:14 -0500
-Subject: [PATCH 29/32] Reduce the size of udfps enroll progress bar. Some
+Subject: [PATCH 29/36] Reduce the size of udfps enroll progress bar. Some
  devices have their udfps pretty low, and the progress bar would make the icon
  at the wrong place
 
