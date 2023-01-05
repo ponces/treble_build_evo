@@ -1,7 +1,7 @@
-From 83d909ae791d04533924ebd18b2937e6214ab8cf Mon Sep 17 00:00:00 2001
+From c94bccf659a938664844dbf5558a9bc51d13af22 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Tue, 14 Aug 2018 19:33:03 +0200
-Subject: [PATCH 07/14] Detect allowed sdcard options based on vndk
+Subject: [PATCH 07/15] Detect allowed sdcard options based on vndk
 
 Some kernel crashes when using too recent sdcardfs options
 

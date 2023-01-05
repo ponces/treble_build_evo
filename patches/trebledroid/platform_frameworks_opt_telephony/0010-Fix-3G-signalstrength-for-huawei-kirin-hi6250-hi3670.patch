@@ -1,4 +1,4 @@
-From d8a53e1b714b837370acf843b60be5eb2e2c8953 Mon Sep 17 00:00:00 2001
+From 3cb1c86c87a3c4fca45de64c21c960892862539c Mon Sep 17 00:00:00 2001
 From: Raphael Mounier <mounierr07@gmail.com>
 Date: Tue, 22 Nov 2022 06:54:35 +0100
 Subject: [PATCH 10/10] Fix 3G signalstrength for huawei kirin (hi6250, hi3670)
@@ -15,10 +15,10 @@ The RILUtils.convertHalSignalStrength function does not work correctly under Hua
  1 file changed, 98 insertions(+), 93 deletions(-)
 
 diff --git a/src/java/com/android/internal/telephony/RIL.java b/src/java/com/android/internal/telephony/RIL.java
-index f21c7248de..a8108d7d00 100644
+index f30bee5846..6b27f9dacd 100644
 --- a/src/java/com/android/internal/telephony/RIL.java
 +++ b/src/java/com/android/internal/telephony/RIL.java
-@@ -5914,114 +5914,119 @@ public class RIL extends BaseCommands implements CommandsInterface {
+@@ -5940,114 +5940,119 @@ public class RIL extends BaseCommands implements CommandsInterface {
          int gsmSignalStrength = signalStrength.gw.signalStrength;
          int gsmBitErrorRate = signalStrength.gw.bitErrorRate;
          int gsmTimingAdvance = signalStrength.gw.timingAdvance;

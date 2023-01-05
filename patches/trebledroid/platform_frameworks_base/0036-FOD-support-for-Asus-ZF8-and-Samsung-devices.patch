@@ -1,7 +1,7 @@
-From 7a06b734d402946fa7cbede78ea1e9428c0e7626 Mon Sep 17 00:00:00 2001
+From c05651782358638ace34956b145d84a3e9bbce1c Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sun, 18 Dec 2022 18:20:40 -0500
-Subject: [PATCH 36/36] FOD support for Asus ZF8 and Samsung devices
+Subject: [PATCH 36/37] FOD support for Asus ZF8 and Samsung devices
 
 Thanks Asus for providing a free device to make this support
 And thanks @davigamer987 for donating enough to get a Samsung FOD device
@@ -9,26 +9,27 @@ to make this
 ---
  packages/SystemUI/Android.bp                  |   1 +
  packages/SystemUI/res/values/config.xml       |   2 +-
- .../biometrics/UdfpsControllerOverlay.kt      |   8 +-
- .../android/systemui/biometrics/UdfpsView.kt  | 139 ++++++++++
+ .../biometrics/UdfpsControllerOverlay.kt      |   7 +-
+ .../android/systemui/biometrics/UdfpsView.kt  | 138 ++++++++++
  services/core/Android.bp                      |   7 +-
  .../server/biometrics/AuthService.java        | 238 +++++++++++++++++-
- 6 files changed, 390 insertions(+), 5 deletions(-)
+ 6 files changed, 388 insertions(+), 5 deletions(-)
 
 diff --git a/packages/SystemUI/Android.bp b/packages/SystemUI/Android.bp
-index f05c1e2e76f2..40536d7e9584 100644
+index df6f08df7c56..740127888c4b 100644
 --- a/packages/SystemUI/Android.bp
 +++ b/packages/SystemUI/Android.bp
-@@ -130,6 +130,7 @@ android_library {
-         "bcsmartspace-google",
+@@ -125,7 +125,8 @@ android_library {
+         "jsr330",
+         "lottie",
+         "LowLightDreamLib",
          "faceunlock_framework",
          "vendor.lineage.powershare-V1.0-java",
 +        "vendor.goodix.hardware.biometrics.fingerprint-V2.1-java",
      ],
      manifest: "AndroidManifest.xml",
- 
 diff --git a/packages/SystemUI/res/values/config.xml b/packages/SystemUI/res/values/config.xml
-index c3430211747f..eeb1fa56ff56 100644
+index 92b132a8f32e..c1cf51b85a1c 100644
 --- a/packages/SystemUI/res/values/config.xml
 +++ b/packages/SystemUI/res/values/config.xml
 @@ -577,7 +577,7 @@
@@ -41,10 +42,10 @@ index c3430211747f..eeb1fa56ff56 100644
  
      <!-- The time (in ms) needed to trigger the lock icon view's long-press affordance -->
 diff --git a/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsControllerOverlay.kt b/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsControllerOverlay.kt
-index ec720579fbee..572466095dda 100644
+index 1c62f8a4e508..7b2713bf3419 100644
 --- a/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsControllerOverlay.kt
 +++ b/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsControllerOverlay.kt
-@@ -155,6 +158,9 @@ class UdfpsControllerOverlay(
+@@ -153,6 +155,9 @@ class UdfpsControllerOverlay(
  
                      windowManager.addView(this, coreLayoutParams.updateDimensions(animation))
                      touchExplorationEnabled = accessibilityManager.isTouchExplorationEnabled
@@ -55,10 +56,10 @@ index ec720579fbee..572466095dda 100644
                          if (accessibilityManager.isTouchExplorationEnabled) {
                              setOnHoverListener { v, event -> onTouch(v, event, true) }
 diff --git a/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.kt b/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.kt
-index 245c2252d57b..bb43f2e4e4d0 100644
+index a15456d46897..d591cc809129 100644
 --- a/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.kt
 +++ b/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.kt
-@@ -19,15 +19,23 @@ import android.content.Context
+@@ -19,17 +19,26 @@ import android.content.Context
  import android.graphics.Canvas
  import android.graphics.Color
  import android.graphics.Paint
@@ -72,7 +73,6 @@ index 245c2252d57b..bb43f2e4e4d0 100644
 +import android.view.SurfaceHolder
 +import android.view.SurfaceView
 +import android.view.ViewGroup
- import android.view.Surface
  import android.widget.FrameLayout
  import com.android.systemui.R
  import com.android.systemui.doze.DozeReceiver
@@ -82,11 +82,15 @@ index 245c2252d57b..bb43f2e4e4d0 100644
  
  private const val TAG = "UdfpsView"
  
-@@ -38,6 +46,54 @@ class UdfpsView(
++
+ /**
+  * The main view group containing all UDFPS animations.
+  */
+@@ -37,6 +46,54 @@ class UdfpsView(
      context: Context,
      attrs: AttributeSet?
  ) : FrameLayout(context, attrs), DozeReceiver {
-+    private var currentOnDisplayConfigured: Runnable? = null
++    private var currentOnIlluminatedRunnable: Runnable? = null
 +    private val mySurfaceView = SurfaceView(context)
 +    init {
 +        mySurfaceView.setVisibility(INVISIBLE)
@@ -120,7 +124,7 @@ index 245c2252d57b..bb43f2e4e4d0 100644
 +                    }
 +                }
 +
-+                currentOnDisplayConfigured?.run()
++                currentOnIlluminatedRunnable?.run()
 +            }
 +
 +            override fun surfaceChanged(p0: SurfaceHolder, p1: Int, p2: Int, p3: Int) {
@@ -137,7 +141,7 @@ index 245c2252d57b..bb43f2e4e4d0 100644
  
      // sensorRect may be bigger than the sensor. True sensor dimensions are defined in
      // overlayParams.sensorBounds
-@@ -66,6 +122,8 @@ class UdfpsView(
+@@ -62,6 +119,8 @@ class UdfpsView(
      /** Parameters that affect the position and size of the overlay. */
      var overlayParams = UdfpsOverlayParams()
  
@@ -146,7 +150,7 @@ index 245c2252d57b..bb43f2e4e4d0 100644
      /** Debug message. */
      var debugMessage: String? = null
          set(value) {
-@@ -148,6 +206,21 @@ class UdfpsView(
+@@ -140,15 +199,94 @@ class UdfpsView(
              !(animationViewController?.shouldPauseAuth() ?: false)
      }
  
@@ -168,10 +172,7 @@ index 245c2252d57b..bb43f2e4e4d0 100644
      fun configureDisplay(onDisplayConfigured: Runnable) {
          isDisplayConfigured = true
          animationViewController?.onDisplayConfiguring()
-@@ -159,9 +232,30 @@ class UdfpsView(
-         } else {
-             doIlluminate(null /* surface */, onDisplayConfigured)
-         }
+         mUdfpsDisplayMode?.enable(onDisplayConfigured)
 +
 +        mySurfaceView.setVisibility(VISIBLE)
 +        Log.d("PHH", "setting surface visible!")
@@ -194,15 +195,11 @@ index 245c2252d57b..bb43f2e4e4d0 100644
 +        }
      }
  
-     private fun doIlluminate(surface: Surface?, onDisplayConfigured: Runnable?) {
-+        currentOnDisplayConfigured = onDisplayConfigured
-         if (ghbmView != null && surface == null) {
-             Log.e(TAG, "doIlluminate | surface must be non-null for GHBM")
-         }
-@@ -174,6 +268,50 @@ class UdfpsView(
-     }
- 
      fun unconfigureDisplay() {
+         isDisplayConfigured = false
+         animationViewController?.onDisplayUnconfigured()
+         mUdfpsDisplayMode?.disable(null /* onDisabled */)
++
 +        if (hasAsusGhbm) {
 +            fodFileObserver = object: FileObserver(asusGhbmOnAchieved, FileObserver.MODIFY) {
 +                override fun onEvent(event: Int, path: String): Unit {
@@ -246,10 +243,8 @@ index 245c2252d57b..bb43f2e4e4d0 100644
 +        if(android.os.SystemProperties.get("ro.vendor.build.fingerprint").contains("ASUS")) {
 +            goodixCmd(200003)
 +        }
-+        currentOnDisplayConfigured = null
-         isDisplayConfigured = false
-         animationViewController?.onDisplayUnconfigured()
-         ghbmView?.let { view ->
+     }
+ }
 diff --git a/services/core/Android.bp b/services/core/Android.bp
 index 34a4579855ef..604e1be0f03f 100644
 --- a/services/core/Android.bp
@@ -378,7 +373,7 @@ index 6fbc3c66c1bc..748152aa7c97 100644
      }
  
      /**
-@@ -775,18 +775,104 @@ public class AuthService extends SystemService {
+@@ -773,18 +858,104 @@ public class AuthService extends SystemService {
                  ? modality : (modality & ~BiometricAuthenticator.TYPE_CREDENTIAL);
      }
  

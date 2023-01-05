@@ -1,7 +1,7 @@
-From 1ad9e46f1320ad51801a561536061d90201285f4 Mon Sep 17 00:00:00 2001
+From 43d8d477ec3bb0551fef4f3c72ea2709f7bb7442 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sun, 6 Dec 2020 12:20:08 +0100
-Subject: [PATCH 17/36] Make rounded corners padding overridable with
+Subject: [PATCH 17/37] Make rounded corners padding overridable with
  persist.sys.phh.rounded_corners_padding
 
 Change-Id: I481c1c8849b2f22a7cdfb2896a6d3c2e7e3b44d9
@@ -12,7 +12,7 @@ Change-Id: I481c1c8849b2f22a7cdfb2896a6d3c2e7e3b44d9
  3 files changed, 14 insertions(+), 5 deletions(-)
 
 diff --git a/packages/SystemUI/src/com/android/systemui/qs/QuickStatusBarHeader.java b/packages/SystemUI/src/com/android/systemui/qs/QuickStatusBarHeader.java
-index b01a8bfb4492..e0bb310218ca 100644
+index 264edb1ec9e4..d8354149bae4 100644
 --- a/packages/SystemUI/src/com/android/systemui/qs/QuickStatusBarHeader.java
 +++ b/packages/SystemUI/src/com/android/systemui/qs/QuickStatusBarHeader.java
 @@ -29,6 +29,7 @@ import android.content.res.Resources;
@@ -37,7 +37,7 @@ index b01a8bfb4492..e0bb310218ca 100644
          int qsOffsetHeight = SystemBarUtils.getQuickQsOffsetHeight(mContext);
  
 diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardStatusBarView.java b/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardStatusBarView.java
-index 9a333d1acfd2..06c235d66849 100644
+index 18877f9fb437..38c4ca07ec4b 100644
 --- a/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardStatusBarView.java
 +++ b/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardStatusBarView.java
 @@ -36,6 +36,7 @@ import android.provider.Settings;
@@ -62,7 +62,7 @@ index 9a333d1acfd2..06c235d66849 100644
  
      private void updateVisibilities() {
 diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBarContentInsetsProvider.kt b/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBarContentInsetsProvider.kt
-index f5462bc0fba5..c09ab6db814b 100644
+index c850d4f9c56b..af12f592398b 100644
 --- a/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBarContentInsetsProvider.kt
 +++ b/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBarContentInsetsProvider.kt
 @@ -39,6 +39,7 @@ import com.android.systemui.util.leak.RotationUtils.Rotation
