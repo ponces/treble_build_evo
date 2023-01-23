@@ -1,7 +1,7 @@
 From c05651782358638ace34956b145d84a3e9bbce1c Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sun, 18 Dec 2022 18:20:40 -0500
-Subject: [PATCH 36/37] FOD support for Asus ZF8 and Samsung devices
+Subject: [PATCH 36/38] FOD support for Asus ZF8 and Samsung devices
 
 Thanks Asus for providing a free device to make this support
 And thanks @davigamer987 for donating enough to get a Samsung FOD device
@@ -19,15 +19,14 @@ diff --git a/packages/SystemUI/Android.bp b/packages/SystemUI/Android.bp
 index df6f08df7c56..740127888c4b 100644
 --- a/packages/SystemUI/Android.bp
 +++ b/packages/SystemUI/Android.bp
-@@ -125,7 +125,8 @@ android_library {
-         "jsr330",
-         "lottie",
-         "LowLightDreamLib",
+@@ -131,6 +131,7 @@ android_library {
          "faceunlock_framework",
          "vendor.lineage.powershare-V1.0-java",
+         "//hardware/google/interfaces:com.google.hardware.pixel.display-V6-java",
 +        "vendor.goodix.hardware.biometrics.fingerprint-V2.1-java",
      ],
      manifest: "AndroidManifest.xml",
+ 
 diff --git a/packages/SystemUI/res/values/config.xml b/packages/SystemUI/res/values/config.xml
 index 92b132a8f32e..c1cf51b85a1c 100644
 --- a/packages/SystemUI/res/values/config.xml
@@ -373,7 +372,7 @@ index 6fbc3c66c1bc..748152aa7c97 100644
      }
  
      /**
-@@ -773,18 +858,104 @@ public class AuthService extends SystemService {
+@@ -773,14 +858,100 @@ public class AuthService extends SystemService {
                  ? modality : (modality & ~BiometricAuthenticator.TYPE_CREDENTIAL);
      }
  
@@ -464,10 +463,6 @@ index 6fbc3c66c1bc..748152aa7c97 100644
 -        final int[] udfpsProps = getContext().getResources().getIntArray(
 +        int[] udfpsProps = getContext().getResources().getIntArray(
                  com.android.internal.R.array.config_udfps_sensor_props);
- 
-         // Non-empty workaroundLocations indicates that the sensor is SFPS.
-         final List<SensorLocationInternal> workaroundLocations =
-                 getWorkaroundSensorProps(getContext());
  
 -        final boolean isUdfps = !ArrayUtils.isEmpty(udfpsProps);
 +        boolean isUdfps = !ArrayUtils.isEmpty(udfpsProps);

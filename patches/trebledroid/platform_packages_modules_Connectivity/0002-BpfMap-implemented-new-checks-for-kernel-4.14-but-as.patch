@@ -11,7 +11,7 @@ Change-Id: Ia7fa7494a2c320aa521e915d4926e8748d472689
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/service-t/native/libs/libnetworkstats/BpfNetworkStats.cpp b/service-t/native/libs/libnetworkstats/BpfNetworkStats.cpp
-index 9ebef4d6d..ee30f3db3 100644
+index 9ebef4d6d2..ee30f3db30 100644
 --- a/service-t/native/libs/libnetworkstats/BpfNetworkStats.cpp
 +++ b/service-t/native/libs/libnetworkstats/BpfNetworkStats.cpp
 @@ -102,13 +102,13 @@ int bpfGetIfaceStatsInternal(const char* iface, Stats* stats,

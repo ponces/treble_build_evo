@@ -9,7 +9,7 @@ Change-Id: I93b5b8237f6655cb47e0b0584c54cad73a51e7b2
  1 file changed, 1 insertion(+)
 
 diff --git a/service-t/src/com/android/server/net/NetworkStatsService.java b/service-t/src/com/android/server/net/NetworkStatsService.java
-index 4f0f3411a..d45e8fa58 100644
+index 4f0f3411a5..d45e8fa58e 100644
 --- a/service-t/src/com/android/server/net/NetworkStatsService.java
 +++ b/service-t/src/com/android/server/net/NetworkStatsService.java
 @@ -2421,6 +2421,7 @@ public class NetworkStatsService extends INetworkStatsService.Stub {

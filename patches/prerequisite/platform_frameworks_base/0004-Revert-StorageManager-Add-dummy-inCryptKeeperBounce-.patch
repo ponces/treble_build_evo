@@ -1,7 +1,7 @@
 From efddbe0dc2d0a959125aba937a8d85705bb70fb0 Mon Sep 17 00:00:00 2001
 From: Alberto Ponces <ponces26@gmail.com>
 Date: Sun, 20 Nov 2022 20:04:13 +0000
-Subject: [PATCH 3/3] Revert "StorageManager: Add dummy inCryptKeeperBounce method"
+Subject: [PATCH 4/4] Revert "StorageManager: Add dummy inCryptKeeperBounce method"
 
 This reverts commit 787e5e4ef82abc025993c0aded1741e2f25bf49d.
 ---

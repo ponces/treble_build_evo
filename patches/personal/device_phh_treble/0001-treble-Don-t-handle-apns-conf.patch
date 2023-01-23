@@ -3,7 +3,7 @@ From: Andy CrossGate Yan <GeForce8800Ultra@gmail.com>
 Date: Sun, 27 Jun 2021 15:37:56 +0000
 Subject: [PATCH 1/6] treble: Don't handle apns-conf
 
-PE has its own well-maintained copy
+Evolution X has its own well-maintained copy
 
 Change-Id: If568101f21098c75879af8b9b6141af179566960
 ---

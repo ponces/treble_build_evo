@@ -23,7 +23,7 @@ index a78112d118..2421e51285 100644
  #include <pthread.h>
  #include <poll.h>
 @@ -143,6 +144,7 @@ const String16 CameraService::kWatchAllClientsFlag("all");
- static std::set<String8> sServiceErrorEventSet;
+ static std::string sCurrPackageName;
  
  CameraService::CameraService() :
 +        mPhysicalFrontCamStatus(false),

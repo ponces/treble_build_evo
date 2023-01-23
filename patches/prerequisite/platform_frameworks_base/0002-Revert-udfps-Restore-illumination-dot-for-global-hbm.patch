@@ -1,15 +1,15 @@
 From 4e2dcfe2c57d2e3c3d569895d9062be1cd158b0c Mon Sep 17 00:00:00 2001
 From: Alberto Ponces <ponces26@gmail.com>
 Date: Wed, 4 Jan 2023 22:57:34 +0000
-Subject: [PATCH 2/3] Revert "udfps: Restore illumination dot for global hbm"
+Subject: [PATCH 2/4] Revert "udfps: Restore illumination dot for global hbm"
 
 This reverts commit 55f0885dcd7cb9b38fe34743fd54be80c1552a3f.
 
 Change-Id: If5bb208308c7dd6c89f6852d0b6dcef2fe88db80
 ---
  packages/SystemUI/res/layout/udfps_view.xml   |   6 -
- .../android/systemui/biometrics/UdfpsView.kt  |  33 +---
- 2 files changed, 1 insertion(+), 38 deletions(-)
+ .../android/systemui/biometrics/UdfpsView.kt  |  31 +---
+ 2 files changed, 1 insertion(+), 36 deletions(-)
 
 diff --git a/packages/SystemUI/res/layout/udfps_view.xml b/packages/SystemUI/res/layout/udfps_view.xml
 index 0fcbfa161ddf..257d238f5c54 100644
@@ -27,7 +27,7 @@ index 0fcbfa161ddf..257d238f5c54 100644
 -
  </com.android.systemui.biometrics.UdfpsView>
 diff --git a/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.kt b/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.kt
-index f4d3b2342bd5..a15456d46897 100644
+index 9dcd2db4d3b4..a15456d46897 100644
 --- a/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.kt
 +++ b/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.kt
 @@ -24,7 +24,6 @@ import android.graphics.RectF
@@ -38,11 +38,10 @@ index f4d3b2342bd5..a15456d46897 100644
  import android.widget.FrameLayout
  import com.android.systemui.R
  import com.android.systemui.doze.DozeReceiver
-@@ -57,9 +56,6 @@ class UdfpsView(
+@@ -57,8 +56,6 @@ class UdfpsView(
              a.getFloat(R.styleable.UdfpsView_sensorTouchAreaCoefficient, 0f)
          }
  
--    // Only used for UdfpsHbmTypes.GLOBAL_HBM.
 -    private var ghbmView: UdfpsSurfaceView? = null
 -
      /** View controller (can be different for enrollment, BiometricPrompt, Keyguard, etc.). */
@@ -59,7 +58,7 @@ index f4d3b2342bd5..a15456d46897 100644
      override fun dozeTimeTick() {
          animationViewController?.dozeTimeTick()
      }
-@@ -151,35 +143,12 @@ class UdfpsView(
+@@ -151,34 +143,12 @@ class UdfpsView(
      fun configureDisplay(onDisplayConfigured: Runnable) {
          isDisplayConfigured = true
          animationViewController?.onDisplayConfiguring()
@@ -79,8 +78,7 @@ index f4d3b2342bd5..a15456d46897 100644
 -        }
 -
 -        mUdfpsDisplayMode?.enable {
--            isDisplayConfigured = true
--            animationViewController?.onDisplayConfiguring()
+-            onDisplayConfigured?.run()
 -            ghbmView?.drawIlluminationDot(sensorRect)
 -        }
 +        mUdfpsDisplayMode?.enable(onDisplayConfigured)

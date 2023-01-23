@@ -9,7 +9,7 @@ Change-Id: I68ba3be2e15c188e56e32a6ecf844e1ca64d560f
  1 file changed, 9 insertions(+), 2 deletions(-)
 
 diff --git a/netd/BpfHandler.cpp b/netd/BpfHandler.cpp
-index 6ae26c38f..8262f7530 100644
+index 6ae26c38f1..8262f75305 100644
 --- a/netd/BpfHandler.cpp
 +++ b/netd/BpfHandler.cpp
 @@ -71,8 +71,15 @@ static Status initPrograms(const char* cg2_path) {
