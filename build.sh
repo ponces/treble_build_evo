@@ -96,9 +96,9 @@ buildVndkliteVariant() {
 
 generatePackages() {
     echo "--> Generating packages"
-    xz -cv $BD/system-treble_arm64_bvN.img -T0 > $BD/evolution_arm64-ab-7.5-unofficial-$BUILD_DATE.img.xz
-    xz -cv $BD/system-treble_arm64_bvN-vndklite.img -T0 > $BD/evolution_arm64-ab-vndklite-7.5-unofficial-$BUILD_DATE.img.xz
-    xz -cv $BD/system-treble_arm64_bvN-slim.img -T0 > $BD/evolution_arm64-ab-slim-7.5-unofficial-$BUILD_DATE.img.xz
+    xz -cv $BD/system-treble_arm64_bvN.img -T0 > $BD/evolution_arm64-ab-7.6-unofficial-$BUILD_DATE.img.xz
+    xz -cv $BD/system-treble_arm64_bvN-vndklite.img -T0 > $BD/evolution_arm64-ab-vndklite-7.6-unofficial-$BUILD_DATE.img.xz
+    xz -cv $BD/system-treble_arm64_bvN-slim.img -T0 > $BD/evolution_arm64-ab-slim-7.6-unofficial-$BUILD_DATE.img.xz
     rm -rf $BD/system-*.img
     echo
 }
