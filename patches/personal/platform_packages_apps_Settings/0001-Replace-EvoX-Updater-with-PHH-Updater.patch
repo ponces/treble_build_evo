@@ -21,16 +21,6 @@ index 2dc7fc3daa..ec2db61e46 100644
  
      private final UserManager mUm;
  
-@@ -47,8 +47,7 @@ public class SystemUpdatePreferenceController extends BasePreferenceController {
- 
-     @Override
-     public int getAvailabilityStatus() {
--        String buildtype = SystemProperties.get(OTA_BUILD_TYPE_PROP,"unofficial");
--        if (!mUm.isAdminUser() || !buildtype.equalsIgnoreCase("official")){
-+        if (!mUm.isAdminUser()){
-             return UNSUPPORTED_ON_DEVICE;
-         }
-         try {
 -- 
 2.32.0
 
