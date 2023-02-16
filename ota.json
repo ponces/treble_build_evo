@@ -1,21 +1,21 @@
 {
-  "version": "v2023.01.05",
-  "date": "1672922132",
+  "version": "v2023.02.16",
+  "date": "1676545679",
   "variants": [
     {
       "name": "treble_arm64_bvN",
-      "size": "1612786828",
-      "url": "https://github.com/ponces/treble_build_evo/releases/download/v2023.01.05/evolution_arm64-ab-7.5-unofficial-20230105.img.xz"
+      "size": "1506318380",
+      "url": "https://github.com/ponces/treble_build_evo/releases/download/v2023.02.16/evolution_arm64-ab-7.6-unofficial-20230216.img.xz"
     },
     {
       "name": "treble_arm64_bvN-slim",
-      "size": "1347649112",
-      "url": "https://github.com/ponces/treble_build_evo/releases/download/v2023.01.05/evolution_arm64-ab-slim-7.5-unofficial-20230105.img.xz"
+      "size": "1326246188",
+      "url": "https://github.com/ponces/treble_build_evo/releases/download/v2023.02.16/evolution_arm64-ab-slim-7.6-unofficial-20230216.img.xz"
     },
     {
       "name": "treble_arm64_bvN-vndklite",
-      "size": "1568504160",
-      "url": "https://github.com/ponces/treble_build_evo/releases/download/v2023.01.05/evolution_arm64-ab-vndklite-7.5-unofficial-20230105.img.xz"
+      "size": "1465109808",
+      "url": "https://github.com/ponces/treble_build_evo/releases/download/v2023.02.16/evolution_arm64-ab-vndklite-7.6-unofficial-20230216.img.xz"
     }
   ]
 }
