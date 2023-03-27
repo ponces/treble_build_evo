@@ -1,4 +1,4 @@
-From c0c6e7026ef4845000ade7113e6819f179f3d94e Mon Sep 17 00:00:00 2001
+From b4cfa9cb8aed0a8e6660859afdeebc6872c5a9ad Mon Sep 17 00:00:00 2001
 From: Raphael Mounier <mounierr07@gmail.com>
 Date: Thu, 6 Oct 2022 08:35:38 +0200
 Subject: [PATCH 05/10] Fix signalstrength for huawei kirin (hi6250, hi3670)
@@ -163,20 +163,20 @@ index d947d53611..b74103f594 100644
 -        SignalStrength ss = mRil.fixupSignalStrength10(ssInitial);
          // Note this is set to "verbose" because it happens frequently
 -        if (mRil.isLogvOrTrace()) mRil.unsljLogvRet(RIL_UNSOL_SIGNAL_STRENGTH, ss);
-+	if (mRil.isLogvOrTrace()) mRil.unsljLogvRet(RIL_UNSOL_SIGNAL_STRENGTH, signalStrength);
++        if (mRil.isLogvOrTrace()) mRil.unsljLogvRet(RIL_UNSOL_SIGNAL_STRENGTH, signalStrength);
 +
-+	// Fix signalStrength for Huawei
-+	String hardware = android.os.SystemProperties.get("ro.hardware", "");
++        // Fix signalStrength for Huawei
++        String hardware = android.os.SystemProperties.get("ro.hardware", "");
 +        if(hardware.contains("hi3660") || hardware.contains("hi6250") || hardware.contains("hi3670") || hardware.contains("kirin"))
-+	{
-+		if (RIL.RILJ_LOGV) mRil.riljLog("currentSignalStrength Found Huawei device");
-+		ss = mRil.fixupSignalStrengthHuawei(signalStrength);
-+	}
-+	else
-+	{
-+		SignalStrength ssInitial = RILUtils.convertHalSignalStrength(signalStrength);
-+		ss = mRil.fixupSignalStrength10(ssInitial);
-+	}
++        {
++            if (RIL.RILJ_LOGV) mRil.riljLog("currentSignalStrength Found Huawei device");
++            ss = mRil.fixupSignalStrengthHuawei(signalStrength);
++        }
++        else
++        {
++            SignalStrength ssInitial = RILUtils.convertHalSignalStrength(signalStrength);
++            ss = mRil.fixupSignalStrength10(ssInitial);
++        }
  
          if (mRil.mSignalStrengthRegistrant != null) {
              mRil.mSignalStrengthRegistrant.notifyRegistrant(new AsyncResult (null, ss, null));

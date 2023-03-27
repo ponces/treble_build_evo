@@ -79,7 +79,7 @@ index 9dcd2db4d3b4..a15456d46897 100644
 -
 -        mUdfpsDisplayMode?.enable {
 -            onDisplayConfigured?.run()
--            ghbmView?.drawIlluminationDot(sensorRect)
+-            ghbmView?.drawIlluminationDot(RectF(sensorRect))
 -        }
 +        mUdfpsDisplayMode?.enable(onDisplayConfigured)
      }
