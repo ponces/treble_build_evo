@@ -7,5 +7,4 @@
   <project name="phhusson/vendor_magisk" path="vendor/magisk" remote="github" revision="android-10.0" />
   <project name="phhusson/treble_app" path="treble_app" remote="github" revision="master" />
   <project name="ponces/sas-creator" path="sas-creator" remote="github" revision="master" />
-  <project name="notmyst33d/libaptX" path="external/aptx" remote="github" revision="main" />
 </manifest>
