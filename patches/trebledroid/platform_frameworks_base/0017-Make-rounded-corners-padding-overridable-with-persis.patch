@@ -15,7 +15,7 @@ diff --git a/packages/SystemUI/src/com/android/systemui/qs/QuickStatusBarHeader.
 index 946fe542741f..c600468bb488 100644
 --- a/packages/SystemUI/src/com/android/systemui/qs/QuickStatusBarHeader.java
 +++ b/packages/SystemUI/src/com/android/systemui/qs/QuickStatusBarHeader.java
-@@ -22,6 +22,7 @@ import android.content.res.Configuration;
+@@ -29,6 +29,7 @@ import android.content.res.Resources;
  import android.graphics.Color;
  import android.graphics.Rect;
  import android.net.Uri;
@@ -23,7 +23,7 @@ index 946fe542741f..c600468bb488 100644
  import android.os.UserHandle;
  import android.os.VibrationEffect;
  import android.os.Vibrator;
-@@ -253,8 +254,10 @@ public class QuickStatusBarHeader extends FrameLayout {
+@@ -332,8 +333,10 @@ public class QuickStatusBarHeader extends FrameLayout implements TunerService.Tu
          mStatusIconsView.setVisibility(gone ? View.GONE : View.VISIBLE);
          mDatePrivacyView.setVisibility(gone ? View.GONE : View.VISIBLE);
  
@@ -34,7 +34,7 @@ index 946fe542741f..c600468bb488 100644
 +            mRoundedCornerPadding = resources.getDimensionPixelSize(
 +                    R.dimen.rounded_corner_content_padding);
  
-         int qsOffsetHeight = SystemBarUtils.getQuickQsOffsetHeight(mContext);
+         int statusBarHeight = SystemBarUtils.getStatusBarHeight(mContext);
  
 diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardStatusBarView.java b/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardStatusBarView.java
 index 13566ef8c630..58af9e36bfc9 100644

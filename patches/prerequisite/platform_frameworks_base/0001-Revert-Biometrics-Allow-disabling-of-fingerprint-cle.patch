@@ -1,148 +1,47 @@
-From 30e14f76dc6d03eee4ef0c1961af2d3a3ce268c5 Mon Sep 17 00:00:00 2001
+From 9437c16c1f9edcddc1948b689dd0ba8605cecc30 Mon Sep 17 00:00:00 2001
 From: Alberto Ponces <ponces26@gmail.com>
-Date: Sat, 19 Nov 2022 09:12:25 +0000
+Date: Sat, 15 Apr 2023 17:57:46 +0000
 Subject: [PATCH 1/4] Revert "Biometrics: Allow disabling of fingerprint
  cleanups"
 
-This reverts commit 5b3c4f4ed2c0b4c0111e78b356cfcd8efcbf0ef2.
-This reverts commit 55d8e4e8853a6d470530e0308b20529789b83547.
+This reverts commit 1a49539bdadbecd9341898c88cd044b8ac14c10f.
 ---
- .../fingerprint/aidl/FingerprintProvider.java | 35 ++++++++-----------
- .../fingerprint/hidl/Fingerprint21.java       | 33 ++++++++---------
- 2 files changed, 28 insertions(+), 40 deletions(-)
+ .../fingerprint/hidl/Fingerprint21.java | 8 -
+ 1 file changed, 8 deletions(-)
 
-diff --git a/services/core/java/com/android/server/biometrics/sensors/fingerprint/aidl/FingerprintProvider.java b/services/core/java/com/android/server/biometrics/sensors/fingerprint/aidl/FingerprintProvider.java
-index 7d518de547aa..25333c6931d5 100644
---- a/services/core/java/com/android/server/biometrics/sensors/fingerprint/aidl/FingerprintProvider.java
-+++ b/services/core/java/com/android/server/biometrics/sensors/fingerprint/aidl/FingerprintProvider.java
-@@ -53,7 +53,6 @@ import android.util.SparseArray;
- import android.util.proto.ProtoOutputStream;
- 
- import com.android.internal.annotations.VisibleForTesting;
--import com.android.internal.R;
- import com.android.server.biometrics.Utils;
- import com.android.server.biometrics.log.BiometricContext;
- import com.android.server.biometrics.log.BiometricLogger;
-@@ -108,7 +107,6 @@ public class FingerprintProvider implements IBinder.DeathRecipient, ServiceProvi
-     @Nullable private IFingerprint mDaemon;
-     @Nullable private IUdfpsOverlayController mUdfpsOverlayController;
-     @Nullable private ISidefpsController mSidefpsController;
--    private final boolean mCleanupUnusedFingerprints;
- 
-     private final class BiometricTaskStackListener extends TaskStackListener {
-         @Override
-@@ -156,9 +154,6 @@ public class FingerprintProvider implements IBinder.DeathRecipient, ServiceProvi
- 
-         final List<SensorLocationInternal> workaroundLocations = getWorkaroundSensorProps(context);
- 
--        mCleanupUnusedFingerprints = mContext.getResources().getBoolean(
--            R.bool.config_cleanupUnusedFingerprints);
--
-         for (SensorProps prop : props) {
-             final int sensorId = prop.commonProps.sensorId;
- 
-@@ -518,22 +513,20 @@ public class FingerprintProvider implements IBinder.DeathRecipient, ServiceProvi
-     @Override
-     public void scheduleInternalCleanup(int sensorId, int userId,
-             @Nullable ClientMonitorCallback callback) {
--        if (mCleanupUnusedFingerprints) {
--            mHandler.post(() -> {
--                final List<Fingerprint> enrolledList = getEnrolledFingerprints(sensorId, userId);
--                final FingerprintInternalCleanupClient client =
--                        new FingerprintInternalCleanupClient(mContext,
--                                mSensors.get(sensorId).getLazySession(), userId,
--                                mContext.getOpPackageName(), sensorId,
--                                createLogger(BiometricsProtoEnums.ACTION_ENUMERATE,
--                                        BiometricsProtoEnums.CLIENT_UNKNOWN),
--                                mBiometricContext,
--                                enrolledList, FingerprintUtils.getInstance(sensorId),
--                                mSensors.get(sensorId).getAuthenticatorIds());
--                scheduleForSensor(sensorId, client, new ClientMonitorCompositeCallback(callback,
--                        mBiometricStateCallback));
--            });
--        }
-+        mHandler.post(() -> {
-+            final List<Fingerprint> enrolledList = getEnrolledFingerprints(sensorId, userId);
-+            final FingerprintInternalCleanupClient client =
-+                    new FingerprintInternalCleanupClient(mContext,
-+                            mSensors.get(sensorId).getLazySession(), userId,
-+                            mContext.getOpPackageName(), sensorId,
-+                            createLogger(BiometricsProtoEnums.ACTION_ENUMERATE,
-+                                    BiometricsProtoEnums.CLIENT_UNKNOWN),
-+                            mBiometricContext,
-+                            enrolledList, FingerprintUtils.getInstance(sensorId),
-+                            mSensors.get(sensorId).getAuthenticatorIds());
-+            scheduleForSensor(sensorId, client, new ClientMonitorCompositeCallback(callback,
-+                    mBiometricStateCallback));
-+        });
-     }
- 
-     private BiometricLogger createLogger(int statsAction, int statsClient) {
 diff --git a/services/core/java/com/android/server/biometrics/sensors/fingerprint/hidl/Fingerprint21.java b/services/core/java/com/android/server/biometrics/sensors/fingerprint/hidl/Fingerprint21.java
-index 5b0760a433c6..1f8e1791c030 100644
+index 22101e2cc0cd..f93281e049f5 100644
 --- a/services/core/java/com/android/server/biometrics/sensors/fingerprint/hidl/Fingerprint21.java
 +++ b/services/core/java/com/android/server/biometrics/sensors/fingerprint/hidl/Fingerprint21.java
-@@ -49,7 +49,6 @@ import android.util.Slog;
- import android.util.proto.ProtoOutputStream;
- 
- import com.android.internal.annotations.VisibleForTesting;
--import com.android.internal.R;
- import com.android.internal.util.FrameworkStatsLog;
- import com.android.server.biometrics.SensorServiceStateProto;
- import com.android.server.biometrics.SensorStateProto;
-@@ -128,7 +127,6 @@ public class Fingerprint21 implements IHwBinder.DeathRecipient, ServiceProvider
-     private final boolean mIsUdfps;
+@@ -128,8 +128,6 @@ public class Fingerprint21 implements IHwBinder.DeathRecipient, ServiceProvider
      private final int mSensorId;
      private final boolean mIsPowerbuttonFps;
--    private final boolean mCleanupUnusedFingerprints;
  
+-    private boolean mCleanup;
+-
      private final class BiometricTaskStackListener extends TaskStackListener {
          @Override
-@@ -350,8 +348,6 @@ public class Fingerprint21 implements IHwBinder.DeathRecipient, ServiceProvider
-             mDaemon = null;
+         public void onTaskStackChanged() {
+@@ -351,9 +349,6 @@ public class Fingerprint21 implements IHwBinder.DeathRecipient, ServiceProvider
              mCurrentUserId = UserHandle.USER_NULL;
          });
--        mCleanupUnusedFingerprints = mContext.getResources().getBoolean(
--            R.bool.config_cleanupUnusedFingerprints);
  
+-        mCleanup = context.getResources().getBoolean(
+-                 com.android.internal.R.bool.config_cleanupUnusedFingerprints);
+-
          try {
              ActivityManager.getService().registerUserSwitchObserver(mUserSwitchObserver, TAG);
-@@ -733,21 +729,20 @@ public class Fingerprint21 implements IHwBinder.DeathRecipient, ServiceProvider
+         } catch (RemoteException e) {
+@@ -739,9 +734,6 @@ public class Fingerprint21 implements IHwBinder.DeathRecipient, ServiceProvider
  
      private void scheduleInternalCleanup(int userId,
              @Nullable ClientMonitorCallback callback) {
--            if (mCleanupUnusedFingerprints) {
--            mHandler.post(() -> {
--                scheduleUpdateActiveUserWithoutHandler(userId);
--                final List<Fingerprint> enrolledList = getEnrolledFingerprints(
--                        mSensorProperties.sensorId, userId);
--                final FingerprintInternalCleanupClient client = new FingerprintInternalCleanupClient(
--                        mContext, mLazyDaemon, userId, mContext.getOpPackageName(),
--                        mSensorProperties.sensorId,
--                        createLogger(BiometricsProtoEnums.ACTION_ENUMERATE,
--                                BiometricsProtoEnums.CLIENT_UNKNOWN),
--                        mBiometricContext, enrolledList,
--                        FingerprintUtils.getLegacyInstance(mSensorId), mAuthenticatorIds);
--                mScheduler.scheduleClientMonitor(client, callback);
--            });
+-        if (!mCleanup) {
+-            return;
 -        }
-+        mHandler.post(() -> {
-+            scheduleUpdateActiveUserWithoutHandler(userId);
-+
-+            final List<Fingerprint> enrolledList = getEnrolledFingerprints(
-+                    mSensorProperties.sensorId, userId);
-+            final FingerprintInternalCleanupClient client = new FingerprintInternalCleanupClient(
-+                    mContext, mLazyDaemon, userId, mContext.getOpPackageName(),
-+                    mSensorProperties.sensorId,
-+                    createLogger(BiometricsProtoEnums.ACTION_ENUMERATE,
-+                            BiometricsProtoEnums.CLIENT_UNKNOWN),
-+                    mBiometricContext, enrolledList,
-+                    FingerprintUtils.getLegacyInstance(mSensorId), mAuthenticatorIds);
-+            mScheduler.scheduleClientMonitor(client, callback);
-+        });
-     }
+         mHandler.post(() -> {
+             scheduleUpdateActiveUserWithoutHandler(userId);
  
-     @Override
 -- 
 2.34.1
 

@@ -20,9 +20,9 @@ index e148d4f547a4..1e5148888cb2 100644
 --- a/packages/SystemUI/Android.bp
 +++ b/packages/SystemUI/Android.bp
 @@ -177,6 +177,7 @@ android_library {
+         "motion_tool_lib",
          "vendor.lineage.powershare-V1.0-java",
          "faceunlock_framework",
-         "//hardware/google/interfaces:com.google.hardware.pixel.display-V6-java",
 +        "vendor.goodix.hardware.biometrics.fingerprint-V2.1-java",
      ],
      manifest: "AndroidManifest.xml",
