@@ -1,7 +1,7 @@
 From 3959166887fc1872dfdbf79ff525f951d694432d Mon Sep 17 00:00:00 2001
 From: Alberto Ponces <ponces26@gmail.com>
 Date: Sat, 3 Oct 2020 14:28:35 -0700
-Subject: [PATCH 2/2] build: Fix device name
+Subject: [PATCH 2/3] build: Fix device name
 
 This is only valid for GSI images.
 
