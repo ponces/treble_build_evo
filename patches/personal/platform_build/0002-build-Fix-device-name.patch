@@ -11,10 +11,10 @@ Change-Id: I55c8897d7d4d5c2a9e62b1a931b3856b2e38956e
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/tools/buildinfo.sh b/tools/buildinfo.sh
-index e6b1d0cd1..9a4b0539c 100755
+index e163b0ec6..5f8ff2d6a 100755
 --- a/tools/buildinfo.sh
 +++ b/tools/buildinfo.sh
-@@ -58,6 +58,6 @@ if [ -n "$BUILD_THUMBPRINT" ] ; then
+@@ -55,6 +55,6 @@ if [ -n "$BUILD_THUMBPRINT" ] ; then
    echo "ro.build.thumbprint=$BUILD_THUMBPRINT"
  fi
  

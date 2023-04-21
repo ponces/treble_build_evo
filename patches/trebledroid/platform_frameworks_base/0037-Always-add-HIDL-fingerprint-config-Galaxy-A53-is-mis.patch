@@ -1,4 +1,4 @@
-From 63a6fc23b412c3cd8c3035e6c51a032ff55f1c3f Mon Sep 17 00:00:00 2001
+From ea73a2df3890d58d6c26cdf225fb42150531e0e4 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Tue, 3 Jan 2023 17:59:00 -0500
 Subject: [PATCH 37/38] Always add HIDL fingerprint config (Galaxy A53 is
@@ -42,6 +42,27 @@ index 94b67cedf86c..9468f5f91c24 100644
  
                  final IBiometricService biometricService = IBiometricService.Stub.asInterface(
                          ServiceManager.getService(Context.BIOMETRIC_SERVICE));
+diff --git a/services/core/java/com/android/server/biometrics/BiometricService.java b/services/core/java/com/android/server/biometrics/BiometricService.java
+index 4805d97c34cd..d68b61374475 100644
+--- a/services/core/java/com/android/server/biometrics/BiometricService.java
++++ b/services/core/java/com/android/server/biometrics/BiometricService.java
+@@ -73,6 +73,7 @@ import com.android.internal.statusbar.IStatusBarService;
+ import com.android.internal.util.DumpUtils;
+ import com.android.server.SystemService;
+ import com.android.server.biometrics.sensors.CoexCoordinator;
++import com.android.server.biometrics.sensors.face.custom.CustomFaceProvider;
+ 
+ import java.io.FileDescriptor;
+ import java.io.PrintWriter;
+@@ -610,6 +611,8 @@ public class BiometricService extends SystemService {
+         public synchronized void registerAuthenticator(int id, int modality,
+                 @Authenticators.Types int strength,
+                 @NonNull IBiometricAuthenticator authenticator) {
++            if (modality == BiometricAuthenticator.TYPE_FACE && id != CustomFaceProvider.DEVICE_ID) return;
++
+             checkInternalPermission();
+ 
+             Slog.d(TAG, "Registering ID: " + id
 -- 
 2.25.1
 

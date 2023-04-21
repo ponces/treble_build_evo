@@ -11,7 +11,7 @@ Change-Id: I51fb1436ee0ee2e33b20ca0810b69e827f3f34dc
  1 file changed, 5 deletions(-)
 
 diff --git a/target/product/full_base_telephony.mk b/target/product/full_base_telephony.mk
-index 43df42f43..5470ad2be 100644
+index a37fd48af..5470ad2be 100644
 --- a/target/product/full_base_telephony.mk
 +++ b/target/product/full_base_telephony.mk
 @@ -26,10 +26,5 @@ PRODUCT_VENDOR_PROPERTIES := \
