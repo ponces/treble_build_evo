@@ -16,7 +16,7 @@ index 946fe542741f..c600468bb488 100644
 --- a/packages/SystemUI/src/com/android/systemui/qs/QuickStatusBarHeader.java
 +++ b/packages/SystemUI/src/com/android/systemui/qs/QuickStatusBarHeader.java
 @@ -29,6 +29,7 @@ import android.content.res.Resources;
- import android.graphics.Color;
+ import android.graphics.PorterDuff;
  import android.graphics.Rect;
  import android.net.Uri;
 +import android.os.SystemProperties;

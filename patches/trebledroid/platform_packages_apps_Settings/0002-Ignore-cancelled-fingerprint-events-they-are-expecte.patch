@@ -23,13 +23,6 @@ index 2eadc33c85..720c22b316 100644
          onCancelEnrollment(errMsgId);
      }
  
-@@ -1105,4 +1108,4 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
-             return SettingsEnums.DIALOG_FINGERPRINT_ICON_TOUCH;
-         }
-     }
--}
-\ No newline at end of file
-+}
 diff --git a/src/com/android/settings/biometrics/fingerprint/FingerprintEnrollFindSensor.java b/src/com/android/settings/biometrics/fingerprint/FingerprintEnrollFindSensor.java
 index 89bda20cd7..93c3e6186c 100644
 --- a/src/com/android/settings/biometrics/fingerprint/FingerprintEnrollFindSensor.java
