@@ -1,7 +1,7 @@
 From d7b179f234d76c3acf7a723fc05f07efe9adc84c Mon Sep 17 00:00:00 2001
 From: Andy CrossGate Yan <GeForce8800Ultra@gmail.com>
 Date: Sun, 8 Aug 2021 09:29:32 +0000
-Subject: [PATCH 5/6] board: Set BOARD_EXT4_SHARE_DUP_BLOCKS explicitly
+Subject: [PATCH 5/7] board: Set BOARD_EXT4_SHARE_DUP_BLOCKS explicitly
 
 Change-Id: I725443154fabde548d2e6c1b072d34c27596c421
 ---

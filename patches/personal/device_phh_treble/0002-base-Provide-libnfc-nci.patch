@@ -1,7 +1,7 @@
 From 733911489af7e658d91ec579ee316c9eba29985c Mon Sep 17 00:00:00 2001
 From: Alberto Ponces <ponces26@gmail.com>
 Date: Wed, 25 Dec 2019 12:34:05 +0200
-Subject: [PATCH 2/6] base: Provide libnfc-nci
+Subject: [PATCH 2/7] base: Provide libnfc-nci
 
 	modified:   base.mk
 ---
