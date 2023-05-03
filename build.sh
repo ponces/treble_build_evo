@@ -78,12 +78,21 @@ buildVariant() {
     echo
 }
 
-buildSlimVariant() {
-    echo "--> Building treble_arm64_bvN-slim"
-    (cd vendor/evolution && git am $BL/patches/slim.patch)
+buildMiniVariant() {
+    echo "--> Building treble_arm64_bvN-mini"
+    (cd vendor/evolution && git am $BL/patches/mini.patch)
     make -j$(nproc --all) systemimage
     (cd vendor/evolution && git reset --hard HEAD~1)
-    mv $OUT/system.img $BD/system-treble_arm64_bvN-slim.img
+    mv $OUT/system.img $BD/system-treble_arm64_bvN-mini.img
+    echo
+}
+
+buildPicoVariant() {
+    echo "--> Building treble_arm64_bvN-pico"
+    (cd vendor/evolution && git am $BL/patches/pico.patch)
+    make -j$(nproc --all) systemimage
+    (cd vendor/evolution && git reset --hard HEAD~1)
+    mv $OUT/system.img $BD/system-treble_arm64_bvN-pico.img
     echo
 }
 
@@ -101,7 +110,8 @@ generatePackages() {
     echo "--> Generating packages"
     xz -cv $BD/system-treble_arm64_bvN.img -T0 > $BD/evolution_arm64-ab-7.8-unofficial-$BUILD_DATE.img.xz
     xz -cv $BD/system-treble_arm64_bvN-vndklite.img -T0 > $BD/evolution_arm64-ab-vndklite-7.8-unofficial-$BUILD_DATE.img.xz
-    xz -cv $BD/system-treble_arm64_bvN-slim.img -T0 > $BD/evolution_arm64-ab-slim-7.8-unofficial-$BUILD_DATE.img.xz
+    xz -cv $BD/system-treble_arm64_bvN-mini.img -T0 > $BD/evolution_arm64-ab-mini-7.8-unofficial-$BUILD_DATE.img.xz
+    xz -cv $BD/system-treble_arm64_bvN-pico.img -T0 > $BD/evolution_arm64-ab-pico-7.8-unofficial-$BUILD_DATE.img.xz
     rm -rf $BD/system-*.img
     echo
 }
@@ -115,7 +125,8 @@ applyPatches
 setupEnv
 buildTrebleApp
 buildVariant
-buildSlimVariant
+buildMiniVariant
+buildPicoVariant
 buildVndkliteVariant
 generatePackages
 

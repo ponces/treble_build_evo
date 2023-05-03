@@ -1,7 +1,7 @@
 From 6e64d6a080f4a8f41e8972311cab40c0a0009900 Mon Sep 17 00:00:00 2001
 From: Alberto Ponces <ponces26@gmail.com>
 Date: Wed, 9 Feb 2022 12:41:30 +0000
-Subject: [PATCH 3/4] ota: Handle slim variant
+Subject: [PATCH 3/4] ota: Handle mini and pico variants
 
 ---
  app/src/main/java/me/phh/treble/app/UpdaterActivity.kt | 6 +++---
@@ -11,17 +11,20 @@ diff --git a/app/src/main/java/me/phh/treble/app/UpdaterActivity.kt b/app/src/ma
 index b90bc00..e8de382 100644
 --- a/app/src/main/java/me/phh/treble/app/UpdaterActivity.kt
 +++ b/app/src/main/java/me/phh/treble/app/UpdaterActivity.kt
-@@ -212,10 +212,10 @@ class UpdaterActivity : PreferenceActivity() {
+@@ -252,10 +252,13 @@ class UpdaterActivity : PreferenceActivity() {
  
      private fun getVariant() : String {
          var flavor = SystemProperties.get("ro.build.flavor").replace(Regex("-user(debug)?"), "")
 -        val secure = File("/system/phh/secure")
-+        val velvet = File("/system/product/priv-app/Velvet/Velvet.apk")
++        val calendar = File("/system/product/app/CalendarGooglePrebuilt/CalendarGooglePrebuilt.apk")
++        val photos = File("/system/product/app/Photos/Photos.apk")
          val vndklite = File("/system_ext/apex/com.android.vndk.v27/etc/vndkcore.libraries.27.txt")
 -        if (secure.exists()) {
 -            flavor += "-secure"
-+        if (!velvet.exists()) {
-+            flavor += "-slim"
++        if (!calendar.exists()) {
++            flavor += "-pico"
++        } else if (!photos.exists()) {
++            flavor += "-mini"
          } else if (vndklite.exists()) {
              flavor += "-vndklite"
          }
