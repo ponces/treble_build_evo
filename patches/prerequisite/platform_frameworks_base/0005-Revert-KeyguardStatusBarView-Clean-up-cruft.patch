@@ -1,0 +1,53 @@
+From be37c6a7c44b007dbe17523559982b0285a297b6 Mon Sep 17 00:00:00 2001
+From: Alberto Ponces <ponces26@gmail.com>
+Date: Wed, 3 May 2023 19:07:56 +0000
+Subject: [PATCH 5/5] Revert "KeyguardStatusBarView: Clean up cruft"
+
+This reverts commit 52c776659224e45e00f3316cffaea7ac2a9e23d7.
+---
+ .../statusbar/phone/KeyguardStatusBarView.java    | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardStatusBarView.java b/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardStatusBarView.java
+index 9a048fdaca56..ca55862ae073 100644
+--- a/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardStatusBarView.java
++++ b/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardStatusBarView.java
+@@ -102,6 +102,7 @@ public class KeyguardStatusBarView extends RelativeLayout {
+     private int mCutoutSideNudge = 0;
+ 
+     private DisplayCutout mDisplayCutout;
++    private int mRoundedCornerPadding = 0;
+     // right and left padding applied to this view to account for cutouts and rounded corners
+     private Pair<Integer, Integer> mPadding = new Pair(0, 0);
+ 
+@@ -168,6 +169,18 @@ public class KeyguardStatusBarView extends RelativeLayout {
+                 mStatusIconContainer.getPaddingBottom()
+         );
+ 
++        // Respect font size setting.
++        mCarrierLabel.setTextSize(TypedValue.COMPLEX_UNIT_PX,
++                getResources().getDimensionPixelSize(
++                        com.android.internal.R.dimen.text_size_small_material));
++        lp = (MarginLayoutParams) mCarrierLabel.getLayoutParams();
++
++        int marginStart = calculateMargin(
++                getResources().getDimensionPixelSize(R.dimen.keyguard_carrier_text_margin),
++                mPadding.first);
++        lp.setMarginStart(marginStart);
++
++        mCarrierLabel.setLayoutParams(lp);
+         updateKeyguardStatusBarHeight();
+     }
+ 
+@@ -191,6 +204,8 @@ public class KeyguardStatusBarView extends RelativeLayout {
+                 R.dimen.ongoing_appops_dot_min_padding);
+         mCutoutSideNudge = getResources().getDimensionPixelSize(
+                 R.dimen.display_cutout_margin_consumption);
++        mRoundedCornerPadding = res.getDimensionPixelSize(
++                R.dimen.rounded_corner_content_padding);
+     }
+ 
+     private void updateVisibilities() {
+-- 
+2.34.1
+

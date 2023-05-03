@@ -15,7 +15,7 @@ index a6835fc70..f686b469c 100644
 --- a/libcutils/fs_config.cpp
 +++ b/libcutils/fs_config.cpp
 @@ -86,7 +86,7 @@ static const struct fs_path_config android_dirs[] = {
-     { 00751, AID_ROOT,         AID_SHELL,        0, "system/bin" },
+     { 00755, AID_ROOT,         AID_SHELL,        0, "system/etc" },
      { 00755, AID_ROOT,         AID_ROOT,         0, "system/etc/ppp" },
      { 00755, AID_ROOT,         AID_SHELL,        0, "system/vendor" },
 -    { 00750, AID_ROOT,         AID_SHELL,        0, "system/xbin" },
