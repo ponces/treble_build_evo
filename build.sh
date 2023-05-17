@@ -108,16 +108,43 @@ buildVndkliteVariant() {
 
 generatePackages() {
     echo "--> Generating packages"
-    xz -cv $BD/system-treble_arm64_bvN.img -T0 > $BD/evolution_arm64-ab-7.9-unofficial-$BUILD_DATE.img.xz
-    xz -cv $BD/system-treble_arm64_bvN-vndklite.img -T0 > $BD/evolution_arm64-ab-vndklite-7.9-unofficial-$BUILD_DATE.img.xz
-    xz -cv $BD/system-treble_arm64_bvN-mini.img -T0 > $BD/evolution_arm64-ab-mini-7.9-unofficial-$BUILD_DATE.img.xz
-    xz -cv $BD/system-treble_arm64_bvN-pico.img -T0 > $BD/evolution_arm64-ab-pico-7.9-unofficial-$BUILD_DATE.img.xz
+    buildDate="$(date +%Y%m%d)"
+    xz -cv $BD/system-treble_arm64_bvN.img -T0 > $BD/evolution_arm64-ab-7.9-unofficial-$buildDate.img.xz
+    xz -cv $BD/system-treble_arm64_bvN-vndklite.img -T0 > $BD/evolution_arm64-ab-vndklite-7.9-unofficial-$buildDate.img.xz
+    xz -cv $BD/system-treble_arm64_bvN-mini.img -T0 > $BD/evolution_arm64-ab-mini-7.9-unofficial-$buildDate.img.xz
+    xz -cv $BD/system-treble_arm64_bvN-pico.img -T0 > $BD/evolution_arm64-ab-pico-7.9-unofficial-$buildDate.img.xz
     rm -rf $BD/system-*.img
     echo
 }
 
+generateOta() {
+    echo "--> Generating OTA file"
+    version="$(date +v%Y.%m.%d)"
+    timestamp="$(date +%s)"
+    json="{\"version\": \"$version\",\"date\": \"$timestamp\",\"variants\": ["
+    find $BD/ -name "evolution_*" | {
+        while read file; do
+            filename="$(basename $file)"
+            if [[ $filename == *"vndklite"* ]]; then
+                name="treble_arm64_bvN-vndklite"
+            elif [[ $filename == *"mini"* ]]; then
+                name="treble_arm64_bvN-mini"
+            elif [[ $filename == *"pico"* ]]; then
+                name="treble_arm64_bvN-pico"
+            else
+                name="treble_arm64_bvN"
+            fi
+            size=$(wc -c $file | awk '{print $1}')
+            url="https://github.com/ponces/treble_build_pe/releases/download/$version/$filename"
+            json="${json} {\"name\": \"$name\",\"size\": \"$size\",\"url\": \"$url\"},"
+        done
+        json="${json%?}]}"
+        echo "$json" | jq . > $BL/ota.json
+    }
+    echo
+}
+
 START=`date +%s`
-BUILD_DATE="$(date +%Y%m%d)"
 
 initRepos
 syncRepos
@@ -129,6 +156,7 @@ buildMiniVariant
 buildPicoVariant
 buildVndkliteVariant
 generatePackages
+generateOta
 
 END=`date +%s`
 ELAPSEDM=$(($(($END-$START))/60))
