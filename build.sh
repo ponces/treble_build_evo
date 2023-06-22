@@ -122,7 +122,7 @@ generateOta() {
     version="$(date +v%Y.%m.%d)"
     timestamp="$(date +%s)"
     json="{\"version\": \"$version\",\"date\": \"$timestamp\",\"variants\": ["
-    find $BD/ -name "evolution_*" | {
+    find $BD/ -name "evolution_*" | sort | {
         while read file; do
             filename="$(basename $file)"
             if [[ $filename == *"vndklite"* ]]; then
