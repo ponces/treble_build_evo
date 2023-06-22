@@ -135,7 +135,7 @@ generateOta() {
                 name="treble_arm64_bvN"
             fi
             size=$(wc -c $file | awk '{print $1}')
-            url="https://github.com/ponces/treble_build_pe/releases/download/$version/$filename"
+            url="https://github.com/ponces/treble_build_evo/releases/download/$version/$filename"
             json="${json} {\"name\": \"$name\",\"size\": \"$size\",\"url\": \"$url\"},"
         done
         json="${json%?}]}"
