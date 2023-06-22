@@ -1,0 +1,29 @@
+From a070fc4692ffbf790acdd750f972d28bfc99f81d Mon Sep 17 00:00:00 2001
+From: Alberto Ponces <ponces26@gmail.com>
+Date: Wed, 21 Jun 2023 23:39:11 +0000
+Subject: [PATCH] Revert "config: Support many users/work profiles"
+
+This reverts commit 2cffb8e243fdb32917b725c4c6ec531d33d1bdc1.
+---
+ config/common.mk | 5 -----
+ 1 file changed, 5 deletions(-)
+
+diff --git a/config/common.mk b/config/common.mk
+index b10be5d4..7d462b00 100644
+--- a/config/common.mk
++++ b/config/common.mk
+@@ -133,11 +133,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
+ PRODUCT_COPY_FILES += \
+     vendor/evolution/prebuilt/common/bin/clean_cache.sh:system/bin/clean_cache.sh
+ 
+-# Support many users/work profiles
+-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+-    persist.sys.max_profiles=16 \
+-    fw.max_users=32
+-
+ # Do not include art debug targets
+ PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
+ 
+-- 
+2.34.1
+

@@ -9,12 +9,12 @@ Change-Id: I4c01aa093474a8017366bd5e98586c58b2cd6452
  1 file changed, 2 insertions(+)
 
 diff --git a/config/common.mk b/config/common.mk
-index 0cffb828..12a07ad7 100644
+index 695cd5f0..b10be5d4 100644
 --- a/config/common.mk
 +++ b/config/common.mk
-@@ -115,6 +115,8 @@ PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
-     system/%/libfuse-lite.so \
-     system/%/libntfs-3g.so
+@@ -183,6 +183,8 @@ PRODUCT_PACKAGES += \
+     unrar \
+     zstd
  
 +TARGET_NO_KERNEL_OVERRIDE := true
 +
