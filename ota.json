@@ -1,26 +1,26 @@
 {
-  "version": "v2023.05.04",
-  "date": "1683154996",
+  "version": "v2023.06.22",
+  "date": "1687429046",
   "variants": [
     {
       "name": "treble_arm64_bvN",
-      "size": "1616064492",
-      "url": "https://github.com/ponces/treble_build_evo/releases/download/v2023.05.04/evolution_arm64-ab-7.9-unofficial-20230504.img.xz"
+      "size": "1645123304",
+      "url": "https://github.com/ponces/treble_build_pe/releases/download/v2023.06.22/evolution_arm64-ab-7.9.3-unofficial-20230622.img.xz"
     },
     {
-      "name": "treble_arm64_bvN-slim",
-      "size": "1319583108",
-      "url": "https://github.com/ponces/treble_build_evo/releases/download/v2023.05.04/evolution_arm64-ab-mini-7.9-unofficial-20230504.img.xz"
+      "name": "treble_arm64_bvN-mini",
+      "size": "1333762868",
+      "url": "https://github.com/ponces/treble_build_pe/releases/download/v2023.06.22/evolution_arm64-ab-mini-7.9.3-unofficial-20230622.img.xz"
     },
     {
       "name": "treble_arm64_bvN-pico",
-      "size": "1294891580",
-      "url": "https://github.com/ponces/treble_build_evo/releases/download/v2023.05.04/evolution_arm64-ab-pico-7.9-unofficial-20230504.img.xz"
+      "size": "1312991532",
+      "url": "https://github.com/ponces/treble_build_pe/releases/download/v2023.06.22/evolution_arm64-ab-pico-7.9.3-unofficial-20230622.img.xz"
     },
     {
       "name": "treble_arm64_bvN-vndklite",
-      "size": "1571400048",
-      "url": "https://github.com/ponces/treble_build_evo/releases/download/v2023.05.04/evolution_arm64-ab-vndklite-7.9-unofficial-20230504.img.xz"
+      "size": "1599247848",
+      "url": "https://github.com/ponces/treble_build_pe/releases/download/v2023.06.22/evolution_arm64-ab-vndklite-7.9.3-unofficial-20230622.img.xz"
     }
   ]
 }
