@@ -23,9 +23,9 @@ index 13566ef8c630..58af9e36bfc9 100644
  import android.view.Gravity;
  import android.view.View;
 @@ -198,8 +199,10 @@ public class KeyguardStatusBarView extends RelativeLayout {
+                 R.dimen.ongoing_appops_dot_min_padding);
+         mCutoutSideNudge = getResources().getDimensionPixelSize(
                  R.dimen.display_cutout_margin_consumption);
-         mShowPercentAvailable = getContext().getResources().getBoolean(
-                 com.android.internal.R.bool.config_battery_percentage_setting_available);
 -        mRoundedCornerPadding = res.getDimensionPixelSize(
 -                R.dimen.rounded_corner_content_padding);
 +        mRoundedCornerPadding = SystemProperties.getInt("persist.sys.phh.rounded_corners_padding", -1);
