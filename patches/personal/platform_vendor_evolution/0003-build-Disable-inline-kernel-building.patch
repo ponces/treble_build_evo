@@ -9,18 +9,18 @@ Change-Id: I4c01aa093474a8017366bd5e98586c58b2cd6452
  1 file changed, 2 insertions(+)
 
 diff --git a/config/common.mk b/config/common.mk
-index 695cd5f0..b10be5d4 100644
+index 9f8831f7..72b024fd 100644
 --- a/config/common.mk
 +++ b/config/common.mk
-@@ -183,6 +183,8 @@ PRODUCT_PACKAGES += \
+@@ -178,6 +178,8 @@ PRODUCT_PACKAGES += \
      unrar \
      zstd
  
 +TARGET_NO_KERNEL_OVERRIDE := true
 +
  # Evolution X customization
- TARGET_SUPPORTS_QUICK_TAP ?= false
- TARGET_USES_MINI_GAPPS ?= false
+ TARGET_IS_PIXEL ?= false
+ TARGET_IS_PIXEL_6 ?= false
 -- 
 2.25.1
 

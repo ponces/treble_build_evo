@@ -8,11 +8,11 @@ Subject: [PATCH] Enable pico gapps
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/config/common.mk b/config/common.mk
-index 12a07ad7..8d00fbd6 100644
+index 72b024fd..7926f105 100644
 --- a/config/common.mk
 +++ b/config/common.mk
-@@ -179,7 +179,7 @@ PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
- # Evolution X customization
+@@ -190,7 +190,7 @@ TARGET_IS_PIXEL_TABLET ?= false
+ TARGET_PIXEL_STAND_SUPPORTED ?= false
  TARGET_SUPPORTS_QUICK_TAP ?= false
  TARGET_USES_MINI_GAPPS ?= false
 -TARGET_USES_PICO_GAPPS ?= false
