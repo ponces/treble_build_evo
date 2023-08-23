@@ -1,0 +1,24 @@
+From e114d9ba53b9379bedc46a3a1746022fafb80b42 Mon Sep 17 00:00:00 2001
+From: Alberto Ponces <ponces26@gmail.com>
+Date: Wed, 23 Aug 2023 11:24:17 +0000
+Subject: [PATCH 3/4] build: Prefer Aperture over Camera2
+
+---
+ target/product/handheld_product.mk | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/target/product/handheld_product.mk b/target/product/handheld_product.mk
+index 723e3cffd..6c9fd8886 100644
+--- a/target/product/handheld_product.mk
++++ b/target/product/handheld_product.mk
+@@ -22,6 +22,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/media_product.mk)
+ 
+ # /product packages
+ PRODUCT_PACKAGES += \
++    Aperture \
+     Browser2 \
+     Contacts \
+     DeskClock \
+-- 
+2.34.1
+
