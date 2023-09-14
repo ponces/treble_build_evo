@@ -1,7 +1,7 @@
 From 233efc45d7787f161045f9f26fc9026a1a24c7e1 Mon Sep 17 00:00:00 2001
 From: Alberto Ponces <ponces26@gmail.com>
 Date: Wed, 21 Jun 2023 23:52:47 +0000
-Subject: [PATCH 5/5] Revert "KeyguardStatusBarView: Clean up cruft"
+Subject: [PATCH 6/6] Revert "KeyguardStatusBarView: Clean up cruft"
 
 This reverts commit 92358fda53fa5426ba4d8b154fe4b18b33475c84.
 ---

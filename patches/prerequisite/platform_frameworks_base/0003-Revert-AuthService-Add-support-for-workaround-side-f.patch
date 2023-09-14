@@ -1,10 +1,10 @@
-From bb52f437e60127e4c1d47d1ab6e49b43f95ed494 Mon Sep 17 00:00:00 2001
+From 634e1840fad216d8950e0098d971ff4a35d176e0 Mon Sep 17 00:00:00 2001
 From: Alberto Ponces <ponces26@gmail.com>
-Date: Mon, 23 Jan 2023 16:35:17 +0000
-Subject: [PATCH 3/5] Revert "AuthService: Add support for workaround side fps
+Date: Mon, 23 Jan 2023 16:28:11 +0000
+Subject: [PATCH 3/6] Revert "AuthService: Add support for workaround side fps
  props"
 
-This reverts commit b7eb971d693958fde90560db074e3db9d751c9ec.
+This reverts commit 065de1bce99b5be01f967beb5f573e616bcb4f15.
 ---
  .../com/android/server/biometrics/AuthService.java   | 12 ------------
  .../fingerprint/aidl/FingerprintProvider.java        | 10 ++++------

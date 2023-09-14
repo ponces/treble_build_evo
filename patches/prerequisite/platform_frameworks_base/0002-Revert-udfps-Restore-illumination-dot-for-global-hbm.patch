@@ -1,11 +1,11 @@
-From 4e2dcfe2c57d2e3c3d569895d9062be1cd158b0c Mon Sep 17 00:00:00 2001
+From b26431544c2188cf29d44ec628338fca735a1c11 Mon Sep 17 00:00:00 2001
 From: Alberto Ponces <ponces26@gmail.com>
-Date: Wed, 4 Jan 2023 22:57:34 +0000
-Subject: [PATCH 2/5] Revert "udfps: Restore illumination dot for global hbm"
+Date: Wed, 4 Jan 2023 09:59:33 +0000
+Subject: [PATCH 2/6] Revert "udfps: Restore illumination dot for global hbm"
 
-This reverts commit 55f0885dcd7cb9b38fe34743fd54be80c1552a3f.
+This reverts commit 845824efebf4ac6d24dfa702a37b11706031fd06.
 
-Change-Id: If5bb208308c7dd6c89f6852d0b6dcef2fe88db80
+Change-Id: I366d92eef96c5bdd9b769d63461fe7345fbd700a
 ---
  packages/SystemUI/res/layout/udfps_view.xml   |   6 -
  .../android/systemui/biometrics/UdfpsView.kt  |  31 +---
@@ -27,10 +27,10 @@ index 0fcbfa161ddf..257d238f5c54 100644
 -
  </com.android.systemui.biometrics.UdfpsView>
 diff --git a/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.kt b/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.kt
-index 9dcd2db4d3b4..a15456d46897 100644
+index 97590822a3fb..4a8877edfa53 100644
 --- a/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.kt
 +++ b/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.kt
-@@ -24,7 +24,6 @@ import android.graphics.RectF
+@@ -25,7 +25,6 @@ import android.graphics.RectF
  import android.util.AttributeSet
  import android.util.Log
  import android.view.MotionEvent
@@ -38,7 +38,7 @@ index 9dcd2db4d3b4..a15456d46897 100644
  import android.widget.FrameLayout
  import com.android.systemui.R
  import com.android.systemui.doze.DozeReceiver
-@@ -57,8 +56,6 @@ class UdfpsView(
+@@ -61,8 +60,6 @@ class UdfpsView(
              a.getFloat(R.styleable.UdfpsView_sensorTouchAreaCoefficient, 0f)
          }
  
@@ -47,7 +47,7 @@ index 9dcd2db4d3b4..a15456d46897 100644
      /** View controller (can be different for enrollment, BiometricPrompt, Keyguard, etc.). */
      var animationViewController: UdfpsAnimationViewController<*>? = null
  
-@@ -86,10 +82,6 @@ class UdfpsView(
+@@ -89,10 +86,6 @@ class UdfpsView(
          return (animationViewController == null || !animationViewController!!.shouldPauseAuth())
      }
  
@@ -58,7 +58,7 @@ index 9dcd2db4d3b4..a15456d46897 100644
      override fun dozeTimeTick() {
          animationViewController?.dozeTimeTick()
      }
-@@ -151,34 +143,12 @@ class UdfpsView(
+@@ -160,34 +153,12 @@ class UdfpsView(
      fun configureDisplay(onDisplayConfigured: Runnable) {
          isDisplayConfigured = true
          animationViewController?.onDisplayConfiguring()

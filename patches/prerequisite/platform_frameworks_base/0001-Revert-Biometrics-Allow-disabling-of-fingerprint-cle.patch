@@ -1,16 +1,15 @@
-From 9437c16c1f9edcddc1948b689dd0ba8605cecc30 Mon Sep 17 00:00:00 2001
+From 5c9cd9cce43b6f3b1f0f5d5002631f00ee007fce Mon Sep 17 00:00:00 2001
 From: Alberto Ponces <ponces26@gmail.com>
-Date: Sat, 15 Apr 2023 17:57:46 +0000
-Subject: [PATCH 1/5] Revert "Biometrics: Allow disabling of fingerprint
- cleanups"
+Date: Sun, 16 Oct 2022 16:46:23 +0100
+Subject: [PATCH 1/6] Revert "Biometrics: Allow disabling of fingerprint cleanups"
 
-This reverts commit 1a49539bdadbecd9341898c88cd044b8ac14c10f.
+This reverts commit f4d94e695e8107fd5fcd043a3174c4d9583277a9.
 ---
- .../fingerprint/hidl/Fingerprint21.java | 8 -
+ .../sensors/fingerprint/hidl/Fingerprint21.java           | 8 --------
  1 file changed, 8 deletions(-)
 
 diff --git a/services/core/java/com/android/server/biometrics/sensors/fingerprint/hidl/Fingerprint21.java b/services/core/java/com/android/server/biometrics/sensors/fingerprint/hidl/Fingerprint21.java
-index 22101e2cc0cd..f93281e049f5 100644
+index aff0387658db..1f8e1791c030 100644
 --- a/services/core/java/com/android/server/biometrics/sensors/fingerprint/hidl/Fingerprint21.java
 +++ b/services/core/java/com/android/server/biometrics/sensors/fingerprint/hidl/Fingerprint21.java
 @@ -128,8 +128,6 @@ public class Fingerprint21 implements IHwBinder.DeathRecipient, ServiceProvider
@@ -32,7 +31,7 @@ index 22101e2cc0cd..f93281e049f5 100644
          try {
              ActivityManager.getService().registerUserSwitchObserver(mUserSwitchObserver, TAG);
          } catch (RemoteException e) {
-@@ -739,9 +734,6 @@ public class Fingerprint21 implements IHwBinder.DeathRecipient, ServiceProvider
+@@ -734,9 +729,6 @@ public class Fingerprint21 implements IHwBinder.DeathRecipient, ServiceProvider
  
      private void scheduleInternalCleanup(int userId,
              @Nullable ClientMonitorCallback callback) {
