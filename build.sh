@@ -4,7 +4,7 @@ echo
 echo "--------------------------------------"
 echo "      Evolution X 13.0 Buildbot       "
 echo "                  by                  "
-echo "    ponces, upstream by semisapeol    "
+echo "                ponces                "
 echo "--------------------------------------"
 echo
 
