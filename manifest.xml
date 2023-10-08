@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
-  <project name="TrebleDroid/device_phh_treble" path="device/phh/treble" remote="github" revision="android-13.0" />
+  <project name="TrebleDroid/device_phh_treble" path="device/phh/treble" remote="github" revision="android-14.0" />
   <project name="TrebleDroid/vendor_hardware_overlay" path="vendor/hardware_overlay" remote="github" revision="pie" />
   <project name="TrebleDroid/vendor_interfaces" path="vendor/interfaces" remote="github" revision="android-13.0" />
   <project name="TrebleDroid/treble_app" path="treble_app" remote="github" revision="master" />
