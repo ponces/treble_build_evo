@@ -4,7 +4,7 @@ echo
 echo "--------------------------------------"
 echo "      Evolution X 13.0 Buildbot       "
 echo "                  by                  "
-echo "                ponces                "
+echo "        ponces, now semisapeol        "
 echo "--------------------------------------"
 echo
 
@@ -16,7 +16,7 @@ BD=$HOME/builds
 initRepos() {
     if [ ! -d .repo ]; then
         echo "--> Initializing workspace"
-        repo init -u https://github.com/Evolution-X/manifest -b tiramisu
+        repo init -u https://github.com/Evolution-X/manifest -b udc
         echo
 
         echo "--> Preparing local manifest"
